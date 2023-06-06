@@ -4,7 +4,7 @@ import categoryModels from "../models/categoryModels.js";
 export const createcategoryContoller=async(req,res)=>{
     
         try {
-                 console.log("han yha tak ok hai")
+                //  console.log("han yha tak ok hai")
                 const {name}=req.body;
                 if(!name)
                 {
@@ -13,8 +13,8 @@ export const createcategoryContoller=async(req,res)=>{
                 const existingCateogry=await categoryModels.findOne({name});
                 if(existingCateogry)
                 {       
-                    console.log("user alread exist");
-                   return  res.status(200).send({
+                    // console.log("user alread exist");
+                   return  res.status(400).send({
                         success:false,
                         message:"Category ALready Exist"
                     })

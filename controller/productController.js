@@ -1,7 +1,6 @@
 import productModel from "../models/productModel.js";
 import categoryModels from "../models/categoryModels.js";
 import orderModel from "../models/orderModel.js";
-
 import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
@@ -32,8 +31,8 @@ export const createproductController = async (req, res) => {
         return res.status(500).send({success:false , error: "category is required" });
       case !quantity:
         return res.status(500).send({success:false , error: "quantity is required" });
-      // case !photo || photo.size > 1000000:
-      //   return res.status(500).send({success:false , error: "photo is required" });
+      case !photo || photo.size > 1000000:
+        return res.status(500).send({success:false , error: "photo is required" });
     }
     const product = new productModel({ ...req.fields, slug: slugify(name) });
     if (photo) {
@@ -80,7 +79,7 @@ export const getproductController = async (req, res) => {
 export const singleproductController = async (req, res) => {
   try {
     const { slug } = req.params;
-    console.log("kya single product ke liye aa rha hu")
+    // console.log("kya single product ke liye aa rha hu")
     const product = await productModel
       .findOne({ slug: slug })
       .select("-photo")
@@ -94,7 +93,7 @@ export const singleproductController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "error in getting single single product",
+      message: "error in getting single product",
     });
   }
 };
@@ -106,7 +105,8 @@ export const productphotoController=async(req,res)=>{
             res.set('Content-Type',product.photo.contentType);
             return res.status(200).send( product.photo.data)
         }
-    } catch (error) {
+    } 
+    catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
@@ -114,7 +114,6 @@ export const productphotoController=async(req,res)=>{
           });
         
     }
-
 }
  
  export const productupdateController=async(req,res)=>{
@@ -142,6 +141,7 @@ export const productphotoController=async(req,res)=>{
       product.photo.data = fs.readFileSync(photo.path);
       product.photo.contentType = photo.type;
     }
+    await product.save();
    
     res.status(201).send({
       success: true,
@@ -330,13 +330,14 @@ export const braintreePaymentController=async(req,res)=>{
       const {cartItem,nonce}=req.body
       let total=0
       cartItem.map((i)=>total+=i.price);
-      let newTransaction=gateway.transaction.sale({
+      let newTransaction=gateway.transaction.sale(
+        {
         amount:total,
         paymentMethodNonce:nonce,
         options:{
           submitForSettlement:true
         }
-      },
+       },
       function(error,result){
         if(result)
         {
