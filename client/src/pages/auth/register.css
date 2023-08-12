@@ -5,9 +5,7 @@
      background-color: #ffdee9;
      background-size: cover;
      background-position: center;
-     
      animation: animateBackground 20s infinite linear;
-     background-image: url(https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg?auto=compress&cs=tinysrgb&w=600)
 }
 @keyframes animateBackground {
     0% {

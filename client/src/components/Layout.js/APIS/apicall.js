@@ -96,7 +96,7 @@ export const searchinputFunc=async(data)=>{
     return await commonrequest("GET","","",`${BASE_URL}/product/search/${data}`);
 }
 export const getsimilarProductfunc=async(data)=>{
-  return await commonrequest("GET","","",`${BASE_URL}/product/related-product/${data.pid}/${data.cid}`)
+  return await commonrequest("GET","","",`${BASE_URL}/product/related-product/${data.pid}/${data.cid}/?page={1}`)
 }
 
 export const getProductCategoryWisefunc=async(data)=>{

@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     if(data)
     {
         const parseData=JSON.parse(data);
+        
         setAuth({
             ...auth,
             user:parseData.user,

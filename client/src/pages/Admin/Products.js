@@ -33,13 +33,13 @@ const Products = () => {
 
     return (
         <Layout >
-            <div className="container-fluid bg-black">
+            <div className="container-fluid bg-black" style={{minHeight:'100vh'}}>
             <div className='row'>
                 <div className="col-md-3 p-5 bg-secondary ">
                     <Adminmenu />
                 </div>
                 <div className="col-md-8 ">
-                    <h1 className='text-center '> <strong style={{color:"whitesmoke"}}>All Product</strong></h1>
+                    <h1 className='text-center '> <strong style={{color:"whitesmoke"}}>All product</strong></h1>
                     <div className='d-flex flex-wrap'>
                         {
                             products.map((p) => (

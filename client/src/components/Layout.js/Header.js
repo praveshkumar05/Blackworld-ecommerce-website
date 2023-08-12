@@ -11,7 +11,7 @@ import { cartContext } from "./context/cart";
 import { Avatar, Badge, Space } from 'antd';
 
 
- const Header = () => { 
+const Header = () => {
   const [auth] = useAuth();
   const [cartItem] = useContext(cartContext);
 
@@ -57,16 +57,16 @@ import { Avatar, Badge, Space } from 'antd';
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link className="navbar-brand " to="/">
+            <Link className="navbar-brand" to="/">
               <SiAdobephotoshop />
               <strong style={{ marginLeft: "7px" }}>BlacKWoRLDSHoP</strong>
             </Link>
+            <div className="d-flex align-items-center">
+              <SearchInput />
+            </div>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <SearchInput />
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/" >
+                <NavLink className="nav-link" to="/">
                   <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Home</span>
                 </NavLink>
               </li>
@@ -78,28 +78,28 @@ import { Avatar, Badge, Space } from 'antd';
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link" to="/login" >
+                    <NavLink className="nav-link" to="/login">
                       <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Login</span>
                     </NavLink>
                   </li>
                 </>
               ) : (
                 <>
-                  <Nav style={{ textDecoration: "none" }}>
-                    <NavDropdown
-                      id="nav-dropdown-dark-example"
-                      title={<span style={{ color: getRandomColor(), fontWeight: 'bold' }}>{auth.user.name}</span>}
-                    // menuVariant="dark"
-                    >
-
-                      <NavDropdown.Item href={`/dashboard/${auth?.role === 1 ? "admin" : "user"}`} >
-                        <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Dashboard</span>
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="/logout">
-                        <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Logout</span>
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  </Nav>
+                  <li className="nav-item">
+                    <Nav style={{ textDecoration: "none" }}>
+                      <NavDropdown
+                        id="nav-dropdown-dark-example"
+                        title={<span style={{ color: getRandomColor(), fontWeight: 'bold' }}>{auth.user.name}</span>}
+                      >
+                        <NavDropdown.Item href={`/dashboard/${auth?.role === 1 ? "admin" : "user"}`}>
+                          <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Dashboard</span>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="/logout">
+                          <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Logout</span>
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    </Nav>
+                  </li>
                 </>
               )}
 
@@ -107,31 +107,27 @@ import { Avatar, Badge, Space } from 'antd';
                 <Nav style={{ textDecoration: "none" }}>
                   <NavDropdown
                     id="nav-dropdown-dark-example"
-                    title={<span style={{ color: getRandomColor(), fontWeight: 'bold' }}>categories</span>}
-
+                    title={<span style={{ color: getRandomColor(), fontWeight: 'bold' }}>Categories</span>}
                   >
-                    <NavDropdown.Item href={`/categories`} >
-                      <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>all categories</span>
+                    <NavDropdown.Item href={`/categories`}>
+                      <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>All Categories</span>
                     </NavDropdown.Item>
-                    {
-                      categories.map((c) => (
-                        <NavDropdown.Item href={`/category/${c.slug}`} >
-                          <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>{c.name}</span>
-                        </NavDropdown.Item>
-                      ))
-                    }
+                    {categories.map((c) => (
+                      <NavDropdown.Item href={`/category/${c.slug}`}>
+                        <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>{c.name}</span>
+                      </NavDropdown.Item>
+                    ))}
                   </NavDropdown>
                 </Nav>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/cart">
                   <span style={{ color: getRandomColor(), fontWeight: 'bold' }}>
-                  {<Space size="middle">
-                    <Badge count={cartItem?.length}>
-                    <Avatar shape="square" size="large">cart</Avatar>
-                    </Badge>
-                    
-                  </Space>}
+                    <Space size="middle">
+                      <Badge count={cartItem?.length}>
+                        <Avatar shape="square" size="large">cart</Avatar>
+                      </Badge>
+                    </Space>
                   </span>
                 </NavLink>
               </li>
@@ -139,6 +135,7 @@ import { Avatar, Badge, Space } from 'antd';
           </div>
         </div>
       </nav>
+
     </>
   );
 };

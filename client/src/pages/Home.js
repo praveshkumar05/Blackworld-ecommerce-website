@@ -90,7 +90,7 @@ const Home = () => {
       setChecked(all);
     } catch (error) {
       console.log(error);
-      toast.success("there is some error in getiting");
+      toast.success("there is some error in selecting the category ");
     }
   };
 
@@ -106,7 +106,6 @@ const Home = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getAllcategory();
     getTotalcount();
@@ -127,143 +126,136 @@ const Home = () => {
 
   return (
     <Layout title={"ALL-BLACK-PRODUCT"}>
-      <div className=" container-fluid  ">
-        <div className="row ">
-            <img
-              src="https://img.freepik.com/free-vector/isometric-young-people-using-technological-devices-background_23-2148126644.jpg?w=740&t=st=1684749206~exp=1684749806~hmac=d606e0633e6acc541d86961cda705c460e5c9112f39fc3b730b0352fef969f51"
-              className="banner-img"
-              alt="bannerimage"
-              width={"100%"}
-            />
-          
-        </div>
-        <div className=" row    bg-black home-page">
-          <div className="col-md-4 filters">
-            <h4 className="text-center">
-              {" "}
-              <span style={{ color: "whitesmoke" }}>
-                <strong>Filter By Category</strong>
-              </span>{" "}
-            </h4>
-            <div className="d-flex flex-column m-3">
-              {categories.map((c) => (
-                <div className="m-sm-1">
-                  <Checkbox
-                    key={c._id}
-                    onChange={(e) => handleCategory(e.target.checked, c._id)}
-                  >
-                    <span style={{ color: "white" }}>
-                      {" "}
-                      <strong>{c.name}</strong>
-                    </span>
-                  </Checkbox>
-                </div>
-              ))}
-            </div>
-            <h4 className="text-center">
-              <span style={{ color: "whitesmoke" }}>
-                <strong>Filter By Price</strong>
-              </span>
-            </h4>
-            <div className="d-flex flex-column m-3">
-              {
-                <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-                  {Prices.map((price) => (
-                    <div className="m-sm-1">
-                      <Radio key={price._id} value={price.array}>
-                        <span style={{ color: "white" }}>
-                          {" "}
-                          <strong>{price.name}</strong>
-                        </span>
-                      </Radio>
-                    </div>
-                  ))}
-                </Radio.Group>
-              }
-            </div>
+      <div style={{ width: "100vw" }}>
 
-            <div className="d-flex flex-column">
-              <button
-                className="btn btn-danger"
-                onClick={() => window.location.reload()}
-                style={{ width: "25rem", margin: "8px", alignItems: "center" }}
-              >
-                Reset Filter
-              </button>
-            </div>
+        <img
+          src="https://img.freepik.com/free-vector/flat-design-shopping-center-twitch-banner_23-2149337409.jpg?w=1380&t=st=1689390789~exp=1689391389~hmac=0ac71410a843a6d91320b1dee31c8f429f68ab6908088f2e2cec45bed360b10f"
+          className="banner-img"
+          alt="bannerimage"
+        />
+      </div>
+      <div className="container-fluid">
+      <div className="row bg-black home-page">
+        <div className="col-md-4 filters">
+          <h4 className="text-center">
+            <span style={{ color: "whitesmoke" }}>
+              <strong>Filter By Category</strong>
+            </span>
+          </h4>
+          <div className="d-flex flex-column ">
+            {categories.map((c) => (
+              <div className="m-sm-1">
+                <Checkbox
+                  key={c._id}
+                  onChange={(e) => handleCategory(e.target.checked, c._id)}
+                >
+                  <span style={{ color: "white" }}>
+                    <strong>{c.name}</strong>
+                  </span>
+                </Checkbox>
+              </div>
+            ))}
           </div>
-          <div className="col-md-8  content">
-            <div className="d-flex flex-wrap">
-              {product.map((p) => (
-                <>
-                  <div
-                    className="card m-3"
-                    style={{
-                      width: "25rem",
-                      margin: "8px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className="card-img-top"
-                      height={"400px"}
-                      src={`${BASE_URL}/product/productPhoto/${p._id}`}
-                      alt="Card  cap"
-                    />
-                    <div className="card-body">
-                      <div className="card-name-price d-flex justify-content-between">
-                        <h5 className="card-title">{p.name}</h5>
-                        <h5 className="card-title card-price">
-                          {p.price.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          })}
-                        </h5>
-                      </div>
-                      <p className="card-text">
-                        {p.description.substring(0, 30)}
-                      </p>
-                      <div className="card-name-price">
-                        <button
-                          class="btn btn-primary ms-2"
-                          onClick={() => {
-                            setCartItem([...cartItem, p]);
-                            localStorage.setItem(
-                              "cartItem",
-                              JSON.stringify(cartItem)
-                            );
-                            toast.success(`${p.name} is added To Cart`);
-                          }}
-                        >
-                          Add To Cart
-                        </button>
-                        <button
-                          class="btn btn-secondary ms-2"
-                          onClick={() => navigate(`/product/${p.slug}`)}
-                        >
-                          More Details
-                        </button>
-                      </div>
-                    </div>
+          <h4 className="text-center">
+            <span style={{ color: "whitesmoke" }}>
+              <strong>Filter By Price</strong>
+            </span>
+          </h4>
+          <div className="d-flex flex-column m-3">
+            {
+              <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                {Prices.map((price) => (
+                  <div className="m-sm-1">
+                    <Radio key={price._id} value={price.array}>
+                      <span style={{ color: "white" }}>
+
+                        <strong>{price.name}</strong>
+                      </span>
+                    </Radio>
                   </div>
-                </>
-              ))}
-            </div>
-            <div className="m-2 p-3 ">
-              {product && product.length < total && (
-                <button
-                  className="btn loadmore"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setPage(page + 1);
+                ))}
+              </Radio.Group>
+            }
+          </div>
+
+          <div className="d-flex flex-column">
+            <button
+              className="btn btn-danger"
+              onClick={() => window.location.reload()}
+              style={{ margin: "8px", alignItems: "center" }}
+            >
+              Reset Filter
+            </button>
+          </div>
+        </div>
+        <div className="col-md-8  content">
+          <div className="d-flex flex-wrap">
+            {product.map((p) => (
+              <>
+                <div
+                  className="card m-3"
+                  style={{
+                    width: "25rem",
+                    margin: "8px",
+                    alignItems: "center",
                   }}
                 >
-                  <h3>{loading ? "Loading..." : "Loadmore"}</h3>
-                </button>
-              )}
-            </div>
+                  <img
+                    className="card-img-top"
+                    height={"400px"}
+                    src={`${BASE_URL}/product/productPhoto/${p._id}`}
+                    alt="Card  cap"
+                  />
+                  <div className="card-body d-flex flex-column">
+                    <div className="card-name-price d-flex justify-content-between align-items-center">
+                      <h5 className="card-title">{p.name}</h5>
+                      <h5 className="card-title card-price">
+                        {p.price.toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        })}
+                      </h5>
+                    </div>
+                    <p className="card-text">{p.description.substring(0, 30)}</p>
+                    <div className="mt-auto">
+                      <button
+                        className="btn btn-primary w-100 mb-2"
+                        onClick={() => {
+                          setCartItem([...cartItem, p]);
+                          localStorage.setItem("cartItem", JSON.stringify(cartItem));
+                          toast.success(`${p.name} is added to Cart`);
+                        }}
+                      >
+                        Add To Cart
+                      </button>
+                      <button
+                        className="btn btn-secondary w-100"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
+                        More Details
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </>
+            ))}
+          </div>
+          <div className="">
+            {product && product.length < total && (
+              <button
+                className="btn loadmore"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}
+              >
+                <h3>{loading ? "Loading..." : "Loadmore"}</h3>
+              </button>
+            )}
           </div>
         </div>
+      </div>
       </div>
     </Layout>
   );

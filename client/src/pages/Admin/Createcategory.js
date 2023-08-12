@@ -108,7 +108,7 @@ const Createcategory = () => {
     <Layout title={"Dashboard -CreateCategory"}>
       <div className="container-fluid bg-secondary " >
         <div className="row ">
-          <div className="col-md-3 p-sm-5" style={{minHeight:"100vh"}}>
+          <div className="col-md-3 p-sm-5" style={{minHeight:"40vh"}}>
             <Adminmenu />
           </div>
           <div className="col-md-9  bg-dark " >

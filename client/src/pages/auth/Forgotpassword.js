@@ -34,7 +34,8 @@ const Forgotpassword = () => {
       if (result.status === 201) {
         toast.success("You Password is updated successfully");
         navigate("/login");
-      } else {
+      } 
+      else {
         toast.error("There is some error try again please");
       }
     }

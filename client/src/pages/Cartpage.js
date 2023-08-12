@@ -73,14 +73,14 @@ const Cartpage = () => {
   return (
     <Layout>
       <div className="cart-page">
-        <div className="row">
+      <div className="row">
           <div className="col-md-12">
-            <h1 className='text-center bg-dark p-2 mb-1 '>
+            <h1 className='text-center bg-dark p-2 mb-1'>
               <strong style={{ color: 'whitesmoke' }}>{`Hello ${auth?.token && auth?.user?.name}`}</strong>
             </h1>
             <h4 className='text-center'>
               {cartItem?.length > 0
-                ? `you have ${cartItem.length} items in your cart ${auth?.token ? "" : "Please login to checkout"}`
+                ? `You have ${cartItem.length} items in your cart${auth?.token ? "" : ". Please login to checkout."}`
                 : "Your cart is empty"
               }
             </h4>
@@ -103,9 +103,7 @@ const Cartpage = () => {
                       />
                     </div>
                     <div className="col-md-5 justify-content-between p-3">
-                    
                     <div className="row">
-                      
                         <div className="col-6">
                              <h5 className="card-title">{p.name}</h5>
                         </div>
@@ -117,17 +115,12 @@ const Cartpage = () => {
                           })}
                         </h5>
                         </div>
-
-                       
                       </div>
-                     
                       <div className="row">
                             <div className="col">
                             <p>{p.description}</p>
-                            </div>
-                           
+                            </div> 
                       </div>
-                      
                       <div className='row' >
                       <button
                         className="btn btn-danger"

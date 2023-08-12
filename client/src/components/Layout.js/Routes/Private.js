@@ -8,7 +8,6 @@ export const PrivateRoute = () => {
   const [ok, setOk] = useState(false);
   const [auth] = useAuth();
   useEffect(() => {
-   // console.log("pravesh");
     const authCheck = async () => {
       const res = await axios.get(`${BASE_URL}/auth/user-auth`, {
         headers: {

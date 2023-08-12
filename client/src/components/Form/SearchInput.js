@@ -6,7 +6,7 @@ import { searchinputFunc } from '../Layout.js/APIS/apicall';
 const SearchInput = () => {
     const [value,setValue]=useContext(searchContext);
     const navigate=useNavigate();
-    const handleSumbit=async(e)=>{
+    const handleSubmit=async(e)=>{
             e.preventDefault();
             try {
                 const {data}=await searchinputFunc(value.keyword);
@@ -19,16 +19,30 @@ const SearchInput = () => {
 
     }
     return (
-        
         <div>
-            <form className="d-flex" role="search" onSubmit={handleSumbit}>
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" 
-                    value={value.keyword}
-                    onChange={(e)=>{setValue({...value,keyword:e.target.value})}}
-                />
-                <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+        <form className="row g-2" role="search" onSubmit={handleSubmit}>
+          <div className="col-sm">
+            <div className="input-group">
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={value.keyword}
+                onChange={(e) => {
+                  setValue({ ...value, keyword: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-sm-auto">
+            <button className="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+
     )
 }
 

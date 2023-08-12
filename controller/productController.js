@@ -137,7 +137,7 @@ export const productphotoController=async(req,res)=>{
     }
     const product = await productModel.findByIdAndUpdate(req.params.id, { ...req.fields, slug: slugify(name) },{new:true});
     if (photo) {
-      console.log(photo);
+      //console.log(photo);
       product.photo.data = fs.readFileSync(photo.path);
       product.photo.contentType = photo.type;
     }
@@ -179,6 +179,7 @@ export const productfilterController=async(req,res)=>{
   try {
             const {checked,radio}=req.body;
             const args={};
+
             if(checked.length>0)args.category=checked;
             if(radio.length)args.price={$gte:radio[0],$lte:radio[1]};
             const product=await productModel.find(args).select("-photo");
@@ -203,16 +204,13 @@ export const prdouctCountController=async(req,res)=>{
         total
       }
     )
-    
   } catch (error) {
       console.log(error)
       res.status(400).send({
       success:false,
       message:"Error in Product Count"
-
       })
   }
-
 }
 // product list based on page
 export const prdouctListController=async(req,res)=>{
