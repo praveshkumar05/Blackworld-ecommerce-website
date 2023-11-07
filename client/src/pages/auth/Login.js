@@ -36,7 +36,7 @@ const Login = () => {
         "Content-Type": "application/json",
       };
       const result = await loginfunc(data, config);
-      //console.log(result);
+      console.log(result);
       if (result.status === 200) {
         setAuth({
           ...auth,
@@ -55,10 +55,10 @@ const Login = () => {
       <Layout>
         <div className="form-container container-fluid" style={{ minHeight: "100vh" }}>
           <div className="row d-flex justify-content-center align-item-center ">
-           
+
             <div className="col-md-5 mt-5 ">
               <form >
-              <h2 className="title text-center" style={{color:"darksalmon"}}><strong > Please Login</strong></h2>
+                <h2 className="title text-center" style={{ color: "darksalmon" }}><strong > Please Login</strong></h2>
                 <div className="mb-3 ">
                   <label htmlFor="exampleInputEmail1" className="form-label">
                     <strong> Email Address </strong>
@@ -95,10 +95,10 @@ const Login = () => {
                       padding: "6px",
                     }} >
                       {show ? (
-                      <VisibilityTwoToneIcon onClick={() => setShow(false)} />
-                    ) : (
-                      <VisibilityOffTwoToneIcon onClick={() => setShow(true)} />
-                    )}
+                        <VisibilityTwoToneIcon onClick={() => setShow(false)} />
+                      ) : (
+                        <VisibilityOffTwoToneIcon onClick={() => setShow(true)} />
+                      )}
                     </span>
                   </div>
                 </div>
@@ -106,19 +106,18 @@ const Login = () => {
                   <h6> <NavLink to="/resetpassword" style={{ textDecoration: "none" }}> ForGot Password?</NavLink> </h6>
                 </div>
                 <div className="mb-3 px-2 row  justify-content-center form-group">
-                      <button
-                        type="submit"
-                        className="btn btn-primary bg-secondary"
-                        onClick={submitData}
-                      >
-                        REGISTER
-                      </button>
-                  
+                  <button
+                    type="submit"
+                    className="btn btn-primary bg-secondary"
+                    onClick={submitData}
+                  >
+                    REGISTER
+                  </button>
+
                 </div>
 
               </form>
             </div>
-           
           </div>
         </div>
       </Layout>
