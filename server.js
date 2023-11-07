@@ -32,6 +32,7 @@ app.use("/api/v1/category",categoryRoute);
 app.use("/api/v1/product",productRoute);
 
 const port=process.env.PORT||6010;
+
 // rest api
 app.use('*',function(req,res){
     res.sendFile(path.join(__dirname,"./client/build/index.html"))

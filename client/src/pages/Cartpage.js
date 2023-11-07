@@ -68,8 +68,7 @@ const Cartpage = () => {
   useEffect(() => {
     getToken();
   }, [auth?.token])
-
-
+  
   return (
     <Layout>
       <div className="cart-page">

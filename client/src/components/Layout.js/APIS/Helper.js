@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const commonrequest=async (methods,body,header,url)=>{
+export const commonrequest= async (methods,body,header,url)=>{
     let config={
         method:methods,
         data:body,

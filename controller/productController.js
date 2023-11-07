@@ -7,6 +7,7 @@ import braintree from "braintree";
 import dotenv from 'dotenv'
 dotenv.config();
 //payment gateway
+
 const  gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
   merchantId:process.env.BRAINTREE_MERCHANT_ID,
@@ -330,13 +331,13 @@ export const braintreePaymentController=async(req,res)=>{
       cartItem.map((i)=>total+=i.price);
       let newTransaction=gateway.transaction.sale(
         {
-        amount:total,
-        paymentMethodNonce:nonce,
-        options:{
-          submitForSettlement:true
+          amount:total,
+          paymentMethodNonce:nonce,
+          options:{
+            submitForSettlement:true
         }
        },
-      function(error,result){
+       (error,result)=>{
         if(result)
         {
           const order=new orderModel({
