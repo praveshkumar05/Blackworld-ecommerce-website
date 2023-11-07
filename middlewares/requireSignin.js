@@ -15,18 +15,24 @@ export const signInrequire = async (req, res, next) => {
   }
 };
 export const adminChecker = async (req, res, next) => {
-  try {
-    const user = await users.findById(req.user);
+
+  users.findById(req.user)
+    .then((user) => {
+      fun(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+  function fun(user) {
     if (user?.role === 1) next();
     else {
-      return res.status(400).send(
+      return res.status(400).json(
         {
           message: "unauthorize access",
           status: "400"
         }
       )
     }
-  }catch (error) {
-    console.log(error);
   }
 }

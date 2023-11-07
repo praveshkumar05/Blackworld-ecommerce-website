@@ -32,12 +32,13 @@ const Header = () => {
   }, []);
 
   function getRandomColor() {
-    // Generate a random color using the Math.random() function
-    const letters = "0123456789ABCDEF";
+    // // Generate a random color using the Math.random() function
+    // const letters = "0123456789ABCDEF";
     let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
+    // for (let i = 0; i < 6; i++) {
+    //   color += letters[Math.floor(Math.random() * 16)];
+    // }
+    color = 'black';
     return color;
   }
   // console.log("print rolt", auth.role);
