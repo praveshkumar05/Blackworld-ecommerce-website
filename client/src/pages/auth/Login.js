@@ -36,7 +36,7 @@ const Login = () => {
         "Content-Type": "application/json",
       };
       const result = await loginfunc(data, config);
-      console.log(result);
+      // console.log(result);
       if (result.status === 200) {
         setAuth({
           ...auth,
