@@ -11,7 +11,7 @@ const CreateProduct = () => {
   const [category, setCategory]=useState("");
   const [photo,setPhoto]=useState("");
   const navigate=useNavigate();
-  // const  [shipping,setShipping]=useState(0);
+  const  [shipping,setShipping]=useState(0);
   const [inputval,setInputval]=useState({
     name:'',
     description:"",
@@ -34,14 +34,14 @@ const CreateProduct = () => {
       
     }
   }
-  const setval=(e)=>{
-      const {name,value}=e.target;
-    setInputval({
-        ...inputval,
-        [name]:value
-    })
+  const setval = (e) => {
+    const { name, value } = e.target;
+    setInputval(prev => ({
+        ...prev,
+        [name]: value
+    }));
+}
 
-  }
   const handleCreate=async()=>{
 
     try {
@@ -86,7 +86,7 @@ const CreateProduct = () => {
              </div>
              <div className="col-md-9 bg-dark">
                 <h1 className='text-center '> <strong style={{color:"whitesmoke"}}>Create Product</strong></h1>
-                <div classNfame="m-1 w-75">
+                <div className="m-1 w-75">
                       <Select
                           placeholder="Select a Category"
                           size='large'
@@ -162,18 +162,19 @@ const CreateProduct = () => {
                            />
                        </div>
                        <div className='mb-3'>
-                          <Select
-                            size='large'
-                            name='shipping'
-                            placeholder='select Shipping'
-                            className='form-select mb-3'
-                            showSearch
-                            onChange={(value)=>setInputval(...inputval,inputval.shipping=value)}
-                          >
-                            <Option value="0">No</Option>
-                            <Option value="1">YES</Option>
-                          </Select>
-                       </div>
+                              <Select
+                                  size='large'
+                                  name='shipping'
+                                  placeholder='select Shipping'
+                                  className='form-select mb-3'
+                                  showSearch
+                                  value={inputval.shipping}  // Ensure the Select component is controlled
+                                  onChange={(value) => setInputval(prev => ({ ...prev, shipping: value }))}
+                              >
+                                  <Option value="0">No</Option>
+                                  <Option value="1">Yes</Option>
+                              </Select>
+                          </div>
                        <div className='mb-5'>
                         <button className='btn btn-primary' onClick={handleCreate}>CREATE PRODUCT</button>
 
@@ -187,5 +188,4 @@ const CreateProduct = () => {
     </Layout>
   )
 }
-
 export default CreateProduct

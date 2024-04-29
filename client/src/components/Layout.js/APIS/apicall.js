@@ -74,7 +74,6 @@ export const getSingleProductfunc=async(data)=>{
   return await commonrequest("GET","","",`${BASE_URL}/product/getProduct/${data}`)
 }
 export const productDeletefunc = async (data,header) => {
-  console.log(data);
   return await commonrequest(
     "DELETE",
     "{}",

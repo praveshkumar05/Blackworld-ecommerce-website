@@ -36,8 +36,8 @@ const Login = () => {
         "Content-Type": "application/json",
       };
       const result = await loginfunc(data, config);
-      // console.log(result);
-      if (result.status === 200) {
+      //  console.log(result);
+      if (result?.data?.status === 200) {
         setAuth({
           ...auth,
           user: result.data.user, token: result.data.token, role: result.data.role
@@ -111,7 +111,7 @@ const Login = () => {
                     className="btn btn-primary bg-secondary"
                     onClick={submitData}
                   >
-                    REGISTER
+                    Log In
                   </button>
 
                 </div>

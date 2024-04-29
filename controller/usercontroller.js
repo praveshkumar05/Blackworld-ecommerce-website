@@ -78,6 +78,7 @@ export const logincontroller = async (req, res) => {
             const role = user.role;
             const match = await comparePassword(user.password, password);
             if (match) {
+                console.log("user is logged in");
                 const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 res.status(200).send({ status: 200, message: "user login successfully", user, token, role });
             }

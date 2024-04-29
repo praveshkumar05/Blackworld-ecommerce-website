@@ -61,6 +61,8 @@ export const categoryContoller=async(req,res)=>{
 
             const category=await categoryModels.find({});
 
+            // console.log(category);
+
             res.status(200).send(
                 {
                      success:true,
