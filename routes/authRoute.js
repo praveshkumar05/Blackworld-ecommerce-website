@@ -1,9 +1,13 @@
 import express from "express"
-import {registerController,logincontroller,testController,passwordreset,updatepasswordController, updateProfileController, getOrdersController, getAllOrdersController} from "../controller/usercontroller.js"
+import {registerController,otpGeneratorController,logincontroller,testController,passwordreset,updatepasswordController, updateProfileController, getOrdersController, getAllOrdersController, otpVerificationController} from "../controller/usercontroller.js"
 const router=express.Router();
 import { signInrequire,adminChecker } from "../middlewares/requireSignin.js";
 import { orderStatusController } from "../controller/usercontroller.js";
 // REGISTER|| METHOD POST
+
+
+router.post('/otp-generation',otpGeneratorController);
+router.post('/otp-verfication',otpVerificationController);
 
 router.post('/register',registerController);
 

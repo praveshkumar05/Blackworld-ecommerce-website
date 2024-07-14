@@ -16,10 +16,8 @@ const Profile = () => {
   });
   const [auth, setAuth] = useAuth();
   useEffect(() => {
-    //const {name,email,password,phone ,address}=auth.user;
-    //console.log(auth.user);
     setinputVal(auth?.user);
-  }, [])
+  })
   const setvalue = async (e) => {
     const { name, value } = e.target;
     setinputVal(() => {

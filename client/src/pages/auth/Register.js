@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout.js/Layout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
- import "./register.css"
+import "./register.css"
 import { registerfunc } from "../../components/Layout.js/APIS/apicall";
 import { useNavigate } from "react-router-dom";
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
@@ -40,11 +40,11 @@ const Register = () => {
         "Content-Type": "application/json",
       };
       const { data } = await registerfunc(Data, config);
-      if (data.status === 201) {
+      if (data?.status === 201) {
         toast.success("You are successfully registered");
         navigate("/login")
       } else {
-        alert(data.message);
+        alert(data?.message);
       }
     }
   };
@@ -52,11 +52,11 @@ const Register = () => {
     <>
       <Layout>
         <ToastContainer />
-        <div className="container-fluid form-container   " style={{height:"100vh"}} >
+        <div className="container-fluid form-container   " style={{ height: "100vh" }} >
           <div className="row d-flex justify-content-center">
             <div className="col-md-5 mt-5 form  ">
               <form className=" m-2">
-                <h2 className="title text-center" style={{color:"darksalmon"}}><strong > Register Here</strong></h2>
+                <h2 className="title text-center" style={{ color: "darksalmon" }}><strong > Register Here</strong></h2>
                 <div className="mb-3  form-group">
                   <input
                     type="text"
@@ -83,7 +83,7 @@ const Register = () => {
                 </div>
 
                 <div className="mb-1  form-group form-inline ">
-                <div className="d-flex" style={{ position: "relative" }}>
+                  <div className="d-flex" style={{ position: "relative" }}>
                     <input
                       type={show ? "text" : "password"}
                       onChange={setvalue}
@@ -101,18 +101,18 @@ const Register = () => {
                       padding: "6px",
                     }} >
                       {show ? (
-                      <VisibilityTwoToneIcon onClick={() => setShow(false)} />
-                    ) : (
-                      <VisibilityOffTwoToneIcon onClick={() => setShow(true)} />
-                    )}
+                        <VisibilityTwoToneIcon onClick={() => setShow(false)} />
+                      ) : (
+                        <VisibilityOffTwoToneIcon onClick={() => setShow(true)} />
+                      )}
                     </span>
                   </div>
-                 <small className="form-text text-muted  " >
-                     <p style={{color:"black",}}>
-                      <strong> password length should be 6-20</strong></p> 
-                </small>
+                  <small className="form-text text-muted  " >
+                    <p style={{ color: "black", }}>
+                      <strong> password length should be 6-20</strong></p>
+                  </small>
                 </div>
-               
+
                 <div className="mb-3  form-group">
                   <input
                     type="text"
@@ -135,7 +135,10 @@ const Register = () => {
                     placeholder="Enter Your Address"
                   />
                 </div>
-                <div className="mb-3 px-2 row  justify-content-center form-group">
+                
+                    
+
+                    <div className="mb-3 px-2 row  justify-content-center form-group">
                       <button
                         type="submit"
                         className="btn btn-primary bg-secondary"
@@ -143,8 +146,9 @@ const Register = () => {
                       >
                         REGISTER
                       </button>
-                  
-                </div>
+                    </div>
+                
+
 
 
               </form>

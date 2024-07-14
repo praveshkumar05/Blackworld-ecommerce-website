@@ -25,7 +25,10 @@ const userSchema=new mongoose.Schema({
     role:{
         type:Number,
         default:0
-    }
+    },
+    otp: { type: String },
+    otpExpires: { type: Date },
+    verified:{type:Boolean}
 },{timestamps:true})
 const users=new mongoose.model("users",userSchema);
 export default users;

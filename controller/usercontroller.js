@@ -1,8 +1,10 @@
 import { hashPassword, comparePassword } from "../helpers/authhelper.js";
 import orderModel from "../models/orderModel.js";
 import users from "../models/userModels.js"
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken' 
 import nodemailer from 'nodemailer'
+import {generateOTP} from '../utils/otpGenerator.js'
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -11,25 +13,59 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+
+export const otpGeneratorController = async(req,res)=>{
+    const { email } = req.body;
+    const otp = generateOTP();
+    
+    try {
+        const newUser = new users({ email, otp, otpExpires: Date.now() + 300000 }); // OTP expires in 1 hour
+        await newUser.save();
+        
+        await sendEmail(email, 'Verify Your Email', `Your OTP is: ${otp}`);
+        res.status(200).send('OTP sent to email');
+    } catch (error) {
+        res.status(500).send('Error during otp Generation:', error);
+    }
+}
+export const otpVerificationController = async(req,res) =>{
+
+    const { email, otp } = req.body;
+    const user = await users.findOne({ email, otp, otpExpires: { $gt: Date.now() } });
+
+    if (!user) {
+        return res.status(400).send('Invalid or expired OTP');
+    }
+
+    user.verified = true; // Update user as verified
+    user.otp = undefined; // Clear OTP
+    user.otpExpires = undefined; // Clear OTP expiry
+    await user.save();
+
+    res.status(200).send('Email verified successfully');
+
+}
+
 export const registerController = async (req, res) => {
     try {
         //    console.log("here we called" )
         const { name, email, password, phone, address } = req.body;
         const userfind = await users.findOne({ email: email });
+        // console.log(userfind);
         if (!userfind) {
             const hashedpassword = await hashPassword(password);
             const userdata = new users({ name, email, password: hashedpassword, phone, address })
-            await userdata.save();
+            await userdata?.save();
             // console.log("user registerd succefully");
             return res.status(201).send({
-                status: 201,
+                status: 201,    
                 success: true,
                 message: "User register successfully",
                 userdata
             })
         }
         else {
-            return res.status(200).send({
+            return res.status(400).send({
                 success: false,
                 message: "Given email already exists"
             })
@@ -108,6 +144,7 @@ export const passwordreset = async (req, res) => {
             );
 
             if (setusertoken) {
+                // await sendEmail(email, 'Reset Password Link', `This Link is valid for 5 minutes only: https://pink-tasty-lion.cyclic.app/Forgotpassword/${userId}/${token}`);
                 sendPasswordResetEmail(email, userFind._id, token); // Separate function for sending emails
                 return res.status(201).send({ status: 201, message: "Email sent successfully" });
             }
@@ -123,7 +160,7 @@ function sendPasswordResetEmail(email, userId, token) {
     const mailOptions = {
         from: "praveshkumar1062002@gmail.com",
         to: email,
-        subject: "Sending Email for Password Reset",
+        subject: "Reset Password Link",
         text: `This Link is valid for 5 minutes only: https://pink-tasty-lion.cyclic.app/Forgotpassword/${userId}/${token}`,
     };
 
