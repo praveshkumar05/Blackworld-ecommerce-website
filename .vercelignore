@@ -1,0 +1,9 @@
+/node_modules
+/server/node_modules
+/client/node_modules
+/logs
+*.log
+npm-debug.log*
+/build
+.DS_Store
+Thumbs.db
