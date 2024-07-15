@@ -1,5 +1,5 @@
 import express from "express"
-import { categoryContoller, createcategoryContoller, singleCategoryController,updateCategorycontroller,deleteCategoryController } from "../controller/categoryController.js";
+import { categoryContoller, createcategoryContoller, singleCategoryController,updateCategorycontroller,deleteCategoryController } from "../config/controller/categoryController.js";
 import { adminChecker, signInrequire } from "../middlewares/requireSignin.js";
 const router=express.Router();
 router.post("/createCategory",signInrequire,adminChecker,createcategoryContoller);

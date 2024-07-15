@@ -1,6 +1,6 @@
 import express from "express"
 import { adminChecker, signInrequire } from "../middlewares/requireSignin.js";
-import { createproductController, getproductController, productphotoController, singleproductController,deleteproductController ,productupdateController, productfilterController, prdouctCountController, prdouctListController, serachProductController, relatedProductController, proudctcategoryController, braintreeTokenController, braintreePaymentController} from "../controller/productController.js";
+import { createproductController, getproductController, productphotoController, singleproductController,deleteproductController ,productupdateController, productfilterController, prdouctCountController, prdouctListController, serachProductController, relatedProductController, proudctcategoryController, braintreeTokenController, braintreePaymentController} from "../config/controller/productController.js";
 import formidable from 'express-formidable'
 const router=express.Router();
 // routes

@@ -1,9 +1,9 @@
-import { hashPassword, comparePassword } from "../helpers/authhelper.js";
-import orderModel from "../models/orderModel.js";
-import users from "../models/userModels.js"
+import { hashPassword, comparePassword } from "../../helpers/authhelper.js";
+import orderModel from "../../models/orderModel.js";
+import users from "../../models/userModels.js"
 import jwt from 'jsonwebtoken' 
 import nodemailer from 'nodemailer'
-import {generateOTP} from '../utils/otpGenerator.js'
+import {generateOTP} from '../../utils/otpGenerator.js'
 
 const transporter = nodemailer.createTransport({
     service: "gmail",

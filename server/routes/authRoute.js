@@ -1,8 +1,8 @@
 import express from "express"
-import {registerController,otpGeneratorController,logincontroller,testController,passwordreset,updatepasswordController, updateProfileController, getOrdersController, getAllOrdersController, otpVerificationController} from "../controller/usercontroller.js"
+import {registerController,otpGeneratorController,logincontroller,testController,passwordreset,updatepasswordController, updateProfileController, getOrdersController, getAllOrdersController, otpVerificationController} from "../config/controller/usercontroller.js"
 const router=express.Router();
 import { signInrequire,adminChecker } from "../middlewares/requireSignin.js";
-import { orderStatusController } from "../controller/usercontroller.js";
+import { orderStatusController } from "../config/controller/usercontroller.js";
 // REGISTER|| METHOD POST
 
 
