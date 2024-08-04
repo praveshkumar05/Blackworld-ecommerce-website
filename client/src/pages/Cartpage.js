@@ -54,6 +54,7 @@ const Cartpage = () => {
       const { nonce } = await instance.requestPaymentMethod();
       setLoading(true);
       const { data } = await paymentfunc({ nonce, cartItem });
+      console.log(data);  
       setLoading(false);
       localStorage.removeItem("cartItem");
       setCartItem([]);

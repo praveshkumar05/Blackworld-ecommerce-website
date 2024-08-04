@@ -15,9 +15,7 @@ const Profile = () => {
     role: "0"
   });
   const [auth, setAuth] = useAuth();
-  useEffect(() => {
-    setinputVal(auth?.user);
-  })
+  useEffect(() => setinputVal(auth?.user), [auth?.user]);
   const setvalue = async (e) => {
     const { name, value } = e.target;
     setinputVal(() => {
